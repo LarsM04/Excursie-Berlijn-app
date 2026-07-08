@@ -1,0 +1,1 @@
+console.log("Berlin Trip App geladen");
