@@ -1,3 +1,7 @@
+/* ==========================
+   BERLIN TRIP APP
+==========================*/
+
 *{
     margin:0;
     padding:0;
@@ -6,168 +10,260 @@
 
 body{
 
-    font-family:'Inter',sans-serif;
-    background:#f5f7fa;
-    color:#1f2937;
+    font-family:Inter,sans-serif;
+    background:#e9edf2;
+    color:#1d2a39;
 
 }
 
-.container{
+/* telefoon */
 
-    width:90%;
-    max-width:500px;
+.phone{
+
+    width:100%;
+    max-width:430px;
+    min-height:100vh;
+
     margin:auto;
 
+    background:white;
+
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:0 0 30px rgba(0,0,0,.08);
+
 }
+
+/* HEADER */
 
 header{
 
-    background:#16324F;
+    background:#17395c;
+
     color:white;
-    padding:20px 0;
+
+    padding:20px;
 
 }
 
-.logo{
+.header-content{
 
-    font-size:22px;
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.header-content h1{
+
+    font-size:28px;
+
     font-weight:700;
 
 }
 
+/* MAIN */
+
 main{
 
-    width:90%;
-    max-width:500px;
-    margin:auto;
-    padding-bottom:120px;
+    padding:20px;
+
+    padding-bottom:110px;
 
 }
+
+/* HERO */
 
 .hero{
 
-    margin:35px 0;
+    background:#17395c;
+
+    color:white;
+
+    border-radius:20px;
+
+    padding:24px;
+
+    margin-bottom:25px;
 
 }
 
-.hero h1{
+.hero small{
+
+    color:#d9e6f2;
+
+}
+
+.hero h2{
 
     font-size:34px;
-    margin-bottom:10px;
+
+    margin:10px 0;
+
+    line-height:1.1;
 
 }
 
 .hero p{
 
-    color:#6b7280;
-    margin-bottom:20px;
+    color:#d9e6f2;
+
+    line-height:1.6;
 
 }
 
+/* zoek */
+
 .search{
 
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:14px;
+    margin-top:20px;
+
+    display:flex;
+
+    align-items:center;
+
     background:white;
-    box-shadow:0 4px 10px rgba(0,0,0,.06);
+
+    border-radius:12px;
+
+    padding:12px 15px;
+
+}
+
+.search i{
+
+    color:#888;
+
+}
+
+.search input{
+
+    border:none;
+
+    outline:none;
+
+    margin-left:10px;
+
+    width:100%;
+
+    font-size:15px;
 
 }
 
 .section{
-
-    margin-top:35px;
-
+    margin-top:30px;
 }
 
-.title{
-
+.section-title{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:18px;
-
+    margin-bottom:15px;
 }
 
-.title a{
+.section-title h2{
+    font-size:30px;
+}
 
+.section-title a{
+    color:#17395c;
     text-decoration:none;
-    color:#16324F;
     font-weight:600;
-
-}
-
-.cards{
-
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-
 }
 
 .card{
-
     background:white;
     border-radius:18px;
     overflow:hidden;
-    box-shadow:0 8px 18px rgba(0,0,0,.05);
-
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    margin-bottom:20px;
 }
 
 .card img{
-
     width:100%;
-    height:180px;
+    height:190px;
     object-fit:cover;
-
+    display:block;
 }
 
-.card-body{
-
+.card-content{
     padding:18px;
+}
 
+.tag{
+    display:inline-block;
+    background:#eef4fa;
+    color:#17395c;
+    font-size:13px;
+    font-weight:600;
+    padding:6px 12px;
+    border-radius:20px;
+    margin-bottom:12px;
 }
 
 .card h3{
-
-    margin-bottom:8px;
-
+    font-size:28px;
+    margin-bottom:10px;
 }
 
 .card p{
+    color:#666;
+    line-height:1.6;
+    margin-bottom:18px;
+}
 
-    color:#6b7280;
-
+.button{
+    display:inline-block;
+    background:#17395c;
+    color:white;
+    text-decoration:none;
+    padding:12px 18px;
+    border-radius:10px;
+    font-weight:600;
 }
 
 .bottom-nav{
 
     position:fixed;
     bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+
     width:100%;
+    max-width:430px;
+
     background:white;
+
     display:flex;
     justify-content:space-around;
+
     padding:14px 0;
-    box-shadow:0 -3px 12px rgba(0,0,0,.08);
+
+    box-shadow:0 -5px 20px rgba(0,0,0,.08);
 
 }
 
 .bottom-nav a{
 
-    text-decoration:none;
-    color:#16324F;
     display:flex;
     flex-direction:column;
+
     align-items:center;
-    gap:4px;
-    font-size:14px;
+
+    gap:6px;
+
+    text-decoration:none;
+
+    color:#666;
+
+    font-size:13px;
 
 }
 
-.bottom-nav span{
-
-    font-size:22px;
-
+.bottom-nav .active{
+    color:#17395c;
 }
