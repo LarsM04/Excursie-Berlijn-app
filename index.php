@@ -3,6 +3,28 @@ $base = '';
 $pageTitle = 'Berlin Trip';
 $activeNav = 'home';
 include 'includes/header.php';
+
+$featuredSpots = app_fetch_all('SELECT * FROM bezienswaardigheden WHERE is_featured = 1 ORDER BY id ASC LIMIT 2');
+$featuredActivities = app_fetch_all('SELECT * FROM activiteiten ORDER BY id ASC LIMIT 2');
+$spotTotalRow = app_fetch_one('SELECT COUNT(*) AS total FROM bezienswaardigheden');
+$activityTotalRow = app_fetch_one('SELECT COUNT(*) AS total FROM activiteiten');
+
+if ($featuredSpots === []) {
+    $featuredSpots = [
+        ['titel' => 'Brandenburger Tor', 'categorie' => 'historisch', 'beschrijving' => 'Het meest herkenbare symbool van Berlijn en een perfecte startplek voor foto\'s en een korte uitleg over de stad.', 'afbeelding' => 'assets/images/Brandenburg.jpg', 'reistijd' => '15 min', 'prijs' => 'Gratis'],
+        ['titel' => 'Reichstag', 'categorie' => 'politiek', 'beschrijving' => 'Een indrukwekkend parlementsgebouw met glazen koepel en een mooi uitzicht over het centrum.', 'afbeelding' => 'assets/images/reichstach.jpg', 'reistijd' => '30 min', 'prijs' => 'Gratis'],
+    ];
+}
+
+if ($featuredActivities === []) {
+    $featuredActivities = [
+        ['titel' => 'Fietstour langs highlights', 'categorie' => 'route', 'beschrijving' => 'Een actieve start waarmee je in korte tijd veel van de stad ziet.', 'afbeelding' => 'assets/images/Brandenburg.jpg', 'duur' => '2 uur', 'label' => 'Groepsactiviteit'],
+        ['titel' => 'Avondwandeling door het centrum', 'categorie' => 'avond', 'beschrijving' => 'Rustig wandelen langs bekende plekken en de stad in de avond ervaren.', 'afbeelding' => 'assets/images/Fernsehturm.jpg', 'duur' => '1,5 uur', 'label' => 'Relaxed tempo'],
+    ];
+}
+
+$spotTotal = (int) ($spotTotalRow['total'] ?? count($featuredSpots));
+$activityTotal = (int) ($activityTotalRow['total'] ?? count($featuredActivities));
 ?>
 
 <section class="hero">
@@ -36,11 +58,11 @@ include 'includes/header.php';
 
     <div class="hero-metrics">
         <div class="metric">
-            <strong>5+</strong>
+            <strong><?php echo $spotTotal; ?></strong>
             <span>bezienswaardigheden</span>
         </div>
         <div class="metric">
-            <strong>5+</strong>
+            <strong><?php echo $activityTotal; ?></strong>
             <span>activiteiten & tips</span>
         </div>
         <div class="metric">
@@ -87,43 +109,60 @@ include 'includes/header.php';
 
     <div class="section-title">
         <div>
-            <h2>Uitgelicht</h2>
-            <p>Een sterke eerste indruk voor op de homepage.</p>
+            <h2>Uitgelicht uit de database</h2>
+            <p>Deze items komen direct uit de excursie-content.</p>
         </div>
         <a href="paginas/bezienswaardigheden.php">Alles bekijken</a>
     </div>
 
-    <article class="card">
-        <div class="card-media">
-            <img src="assets/images/Brandenburg.jpg" alt="Brandenburger Tor">
-            <span class="card-badge"><i class="fa-solid fa-camera"></i> Iconisch</span>
-        </div>
-        <div class="card-content">
-            <span class="tag">Historisch</span>
-            <h3>Brandenburger Tor</h3>
-            <p>Het bekendste symbool van Berlijn en een perfecte startplek voor je excursie.</p>
-            <div class="card-actions">
-                <a href="paginas/bezienswaardigheden.php" class="button">Open overzicht</a>
-                <a href="paginas/praktisch.php" class="button-secondary">Route & vervoer</a>
-            </div>
-        </div>
-    </article>
+    <div class="card-grid">
+        <?php foreach ($featuredSpots as $spot): ?>
+            <article class="card">
+                <div class="card-media">
+                    <img src="<?php echo app_asset($spot['afbeelding'], $base); ?>" alt="<?php echo app_h($spot['titel']); ?>">
+                    <span class="card-badge"><i class="fa-solid fa-camera"></i> <?php echo app_h(ucfirst($spot['categorie'])); ?></span>
+                </div>
+                <div class="card-content">
+                    <span class="tag"><?php echo app_h($spot['prijs']); ?></span>
+                    <h3><?php echo app_h($spot['titel']); ?></h3>
+                    <p><?php echo app_h($spot['beschrijving']); ?></p>
+                    <div class="meta-row">
+                        <span class="meta-pill"><i class="fa-regular fa-clock"></i> <?php echo app_h($spot['reistijd']); ?></span>
+                    </div>
+                    <div class="card-actions">
+                        <a href="paginas/bezienswaardigheden.php" class="button">Open overzicht</a>
+                        <a href="paginas/praktisch.php" class="button-secondary">Praktisch</a>
+                    </div>
+                </div>
+            </article>
+        <?php endforeach; ?>
+    </div>
 
-    <article class="card">
-        <div class="card-media">
-            <img src="assets/images/reichstach.jpg" alt="Reichstag">
-            <span class="card-badge"><i class="fa-solid fa-landmark"></i> Must-see</span>
+</section>
+
+<section class="section">
+
+    <div class="section-title">
+        <div>
+            <h2>Activiteiten om te plannen</h2>
+            <p>Handig als docenten willen kiezen uit meerdere opties.</p>
         </div>
-        <div class="card-content">
-            <span class="tag">Politiek</span>
-            <h3>Reichstag</h3>
-            <p>Een indrukwekkend gebouw met glazen koepel en een prachtig uitzicht over de stad.</p>
-            <div class="card-actions">
-                <a href="paginas/bezienswaardigheden.php" class="button">Meer plekken</a>
-                <a href="paginas/favorieten.php" class="button-secondary">Favorieten</a>
-            </div>
-        </div>
-    </article>
+        <a href="paginas/activiteit.php">Alle activiteiten</a>
+    </div>
+
+    <div class="card-grid">
+        <?php foreach ($featuredActivities as $activity): ?>
+            <article class="activity-card">
+                <div class="activity-icon"><i class="fa-solid fa-compass"></i></div>
+                <h3><?php echo app_h($activity['titel']); ?></h3>
+                <p><?php echo app_h($activity['beschrijving']); ?></p>
+                <div class="activity-meta">
+                    <span class="activity-pill"><?php echo app_h($activity['duur']); ?></span>
+                    <span class="activity-pill"><?php echo app_h($activity['label']); ?></span>
+                </div>
+            </article>
+        <?php endforeach; ?>
+    </div>
 
 </section>
 
