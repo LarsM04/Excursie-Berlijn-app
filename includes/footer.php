@@ -3,22 +3,22 @@
 <nav class="bottom-nav">
 
     <a href="index.php">
-        <span>🏠</span>
+        <i class="fa-solid fa-house"></i>
         <small>Home</small>
     </a>
 
     <a href="paginas/bezienswaardigheden.php">
-        <span>📍</span>
+        <i class="fa-solid fa-location-dot"></i>
         <small>Plekken</small>
     </a>
 
     <a href="paginas/favorieten.php">
-        <span>❤️</span>
+        <i class="fa-solid fa-heart"></i>
         <small>Favorieten</small>
     </a>
 
     <a href="paginas/praktisch.php">
-        <span>ℹ️</span>
+        <i class="fa-solid fa-circle-info"></i>
         <small>Info</small>
     </a>
 
